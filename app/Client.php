@@ -9,7 +9,7 @@ class Client extends Model
 
     protected $table = 'clients';
     public $timestamps = true;
-    protected $fillable = array('district_id', 'name', 'email', 'phone','pin_code','password');
+    protected $fillable = array('district_id', 'name', 'email', 'phone','pin_code','password','activated');
 /**
      * The attributes that should be hidden for arrays.
      *

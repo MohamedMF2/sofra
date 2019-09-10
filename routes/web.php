@@ -25,24 +25,26 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => ['aut
             Route::resource('payment', 'PaymentController');
             Route::get('setting','SettingController@edit')->name('setting.edit');
             Route::post('setting','SettingController@store')->name('setting.store');
-            //Route::resource('restaurant', 'RestaurantController');
             Route::resource('offer', 'OfferController');
-
+            Route::resource('contact', 'ContactController');
+            Route::get('restaurant/{id}/de-activate','RestaurantController@deActivate')->name('restaurant.deActive');
+            Route::get('restaurant/{id}/activate','RestaurantController@activate')->name('restaurant.active');
+            Route::resource('restaurant', 'RestaurantController');
+            Route::get('client/{id}/de-activate','ClientController@deActivate')->name('client.deActive');
+            Route::get('client/{id}/activate','ClientController@activate')->name('client.active');
+            Route::resource('client', 'ClientController');
+            Route::resource('order', 'OrderController');
+            Route::get('change-password','AdminController@edit')->name('admin.edit');
+            Route::post('change-password','AdminController@store')->name('admin.store');
+            Route::resource('user','UserController');
+            Route::resource('role','RoleController');
+            Route::resource('permission','PermissionController');
 
         });
 
       
-
-        // Route::resource('district', 'DistrictController');
-        // Route::resource('client', 'ClientController');
         // Route::resource('notification', 'NotificationController');
-        // Route::resource('order', 'OrderController');
         // Route::resource('product', 'ProductController');
-        // Route::resource('clientrestaurant', 'ClientRestaurantController');
-        // Route::resource('contact', 'ContactController');
-        // Route::resource('orderproduct', 'OrderProductController');
-        // Route::resource('token', 'TokenController');
-        // Route::resource('categoryrestaurant', 'CategoryRestaurantController');
 
     });
     Auth::routes();

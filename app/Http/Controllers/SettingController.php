@@ -10,7 +10,7 @@ class SettingController extends Controller
 
   public function edit()
   {
-    $settings = Setting::all();
+    $settings = Setting::first();
     return view ('dashboard.settings.edit',compact('settings'));
 
   }

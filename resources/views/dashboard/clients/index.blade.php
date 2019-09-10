@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page_title', __('lang.offers'))
+@section('page_title', __('lang.clients'))
                  
 @section('content')     
   <!-- Main content -->
@@ -11,12 +11,11 @@
         <div class="box-header with-border">
           @include('flash::message')
 
-          
 
             <h3 class="box-title">  </h3>
-            <form action="{{ action('OfferController@index')}}" method="get" autocomplete="off">
+            <form action="{{ action('ClientController@index')}}" method="get" autocomplete="off">
                 <div class="form-group">
-                   <input type="search" name="search" placeholder="@lang('lang.search offers by name , description or restaurant name').." value="{{request()->input('search')}}" class="form-control" > 
+                   <input type="search" name="search" placeholder="@lang('lang.search restaurants by name,city,district,category,phone,email').." value="{{request()->input('search')}}" class="form-control" > 
                    <span class="text-danger"> {{ $errors->first('search')}}</span>
                 </div>
                 @csrf
@@ -31,41 +30,43 @@
             </div>
         </div>
         <div class="box-body">
-            @if (count($offers))
+            @if (count($clients))
               <table class="table table-hover">
                 <tbody>
 
                   <tr class=" text-danger">
                     <th style="width: 10px">#</th>
-                    <th class="text-center">@lang('lang.offer')</th>
-                    <th class="text-center">@lang('lang.restaurant')</th>
-                    <th class="text-center">@lang('lang.image')</th>
-                    <th class="text-center">@lang('lang.description')</th>
-                    <th class="text-center">@lang('lang.start date')</th>
-                    <th class="text-center">@lang('lang.end date')</th>
+                    <th class="text-center">@lang('lang.client')</th>
+                    <th class="text-center">@lang('lang.phone')</th>
+                    <th class="text-center">@lang('lang.email')</th>
+                    <th class="text-center">@lang('lang.city')</th>
+                    <th class="text-center">@lang('lang.district')</th>
+                    <th class="text-center">@lang('lang.change state')</th>
                     <th class="text-center">@lang('lang.delete')</th>
 
 
                   </tr>
-                  @foreach ($offers as $offer)
+                  @foreach ($clients as $client)
                       <tr>
                          <td> {{ $loop->iteration}} </td>
-                         <td  class="text-center">  {{ $offer->name }} </td>
-  {{-- this optional method is used because some records aran't present fully in the databse and that usually cause errors
-  , due to the optional() when the query happens the missing data will not affect the process any more for e.g :
-   the offers table has restaurants_id column when it try to the get the name of the restaurant , it can't find
-    arestaurant with this given id in the restaurants table  --}}
-                         <td  class="text-center">  {{ optional($offer->restaurant)->name }} </td>
-                         <td  class="text-center">  {{ $offer->image }} </td>
-                         <td  class="text-center">  {{ $offer->description }} </td>
-                         <td  class="text-center">  {{ $offer->start }} </td>
-                         <td  class="text-center">  {{ $offer->end }} </td>
+                         <td  class="text-center">  {{ $client->name }} </td>
+                         <td  class="text-center">  {{ $client->phone }} </td>
+                         <td  class="text-center">  {{ $client->email }} </td>
+                         <td  class="text-center">  {{ $client->district->city->name}}</td>
+                         <td  class="text-center">  {{ $client->district->name}}</td>
+                         <td class="text-center">
+                          @if($client->activated)
+                       <a href="{{url(route('client.deActive',$client->id))}}" class="btn btn-xs btn-danger"><i class="fa fa-close"></i> إيقاف</a>
+                          @else
+                              <a href="{{url(route('client.active',$client->id))}}" class="btn btn-xs btn-success"><i class="fa fa-check"></i> تفعيل</a>
+                          @endif
+                       </td>
                         
                          <td  class="text-center">
                            
 
                             
-                            {!! Form::open(['url'=>route('offer.destroy',['id'=>$offer->id]),'method'=>'delete' ]) !!}
+                            {!! Form::open(['url'=>route('client.destroy',['id'=>$client->id]),'method'=>'delete' ]) !!}
                             {!!Form::button('<i class="fa fa-trash-o" ></i>' , ['type' => 'submit','class' => 'btn btn-danger btn-lg'] )!!}
                             {!! Form::close() !!}
 
@@ -75,7 +76,7 @@
                   @endforeach
                 </tbody>
               </table>    
-              {{ $offers->links()}}
+              {{ $clients->links()}}
 
             @else
                 <div class="alert alert-danger" role="alert">

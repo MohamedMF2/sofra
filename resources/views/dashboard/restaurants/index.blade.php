@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page_title', __('lang.offers'))
+@section('page_title', __('lang.restaurants'))
                  
 @section('content')     
   <!-- Main content -->
@@ -11,12 +11,11 @@
         <div class="box-header with-border">
           @include('flash::message')
 
-          
 
             <h3 class="box-title">  </h3>
-            <form action="{{ action('OfferController@index')}}" method="get" autocomplete="off">
+            <form action="{{ action('RestaurantController@index')}}" method="get" autocomplete="off">
                 <div class="form-group">
-                   <input type="search" name="search" placeholder="@lang('lang.search offers by name , description or restaurant name').." value="{{request()->input('search')}}" class="form-control" > 
+                   <input type="search" name="search" placeholder="@lang('lang.search restaurants by name,city,district,category,phone,email').." value="{{request()->input('search')}}" class="form-control" > 
                    <span class="text-danger"> {{ $errors->first('search')}}</span>
                 </div>
                 @csrf
@@ -31,41 +30,46 @@
             </div>
         </div>
         <div class="box-body">
-            @if (count($offers))
+            @if (count($restaurants))
               <table class="table table-hover">
                 <tbody>
 
                   <tr class=" text-danger">
                     <th style="width: 10px">#</th>
-                    <th class="text-center">@lang('lang.offer')</th>
                     <th class="text-center">@lang('lang.restaurant')</th>
                     <th class="text-center">@lang('lang.image')</th>
-                    <th class="text-center">@lang('lang.description')</th>
-                    <th class="text-center">@lang('lang.start date')</th>
-                    <th class="text-center">@lang('lang.end date')</th>
+                    <th class="text-center">@lang('lang.category')</th>
+                    <th class="text-center">@lang('lang.city')</th>
+                    <th class="text-center">@lang('lang.change state')</th>
                     <th class="text-center">@lang('lang.delete')</th>
 
 
                   </tr>
-                  @foreach ($offers as $offer)
+                  @foreach ($restaurants as $restaurant)
                       <tr>
                          <td> {{ $loop->iteration}} </td>
-                         <td  class="text-center">  {{ $offer->name }} </td>
-  {{-- this optional method is used because some records aran't present fully in the databse and that usually cause errors
-  , due to the optional() when the query happens the missing data will not affect the process any more for e.g :
-   the offers table has restaurants_id column when it try to the get the name of the restaurant , it can't find
-    arestaurant with this given id in the restaurants table  --}}
-                         <td  class="text-center">  {{ optional($offer->restaurant)->name }} </td>
-                         <td  class="text-center">  {{ $offer->image }} </td>
-                         <td  class="text-center">  {{ $offer->description }} </td>
-                         <td  class="text-center">  {{ $offer->start }} </td>
-                         <td  class="text-center">  {{ $offer->end }} </td>
+                         <td  class="text-center"> <a href="{{route('restaurant.show',$restaurant->id)}}"> {{ $restaurant->name }}</a> </td>
+                         <td  class="text-center">  {{ $restaurant->image }} </td>
+                         <td  class="text-center">
+                            @foreach ($restaurant->categories as $object)
+                               {{ $object->name }}
+                           @endforeach </td>
+
+                         <td  class="text-center">  {{ $restaurant->district->city->name}}
+                         </td>
+                         <td class="text-center">
+                          @if($restaurant->activated)
+                       <a href="{{url(route('restaurant.deActive',$restaurant->id))}}" class="btn btn-xs btn-danger"><i class="fa fa-close"></i> إيقاف</a>
+                          @else
+                              <a href="{{url(route('restaurant.active',$restaurant->id))}}" class="btn btn-xs btn-success"><i class="fa fa-check"></i> تفعيل</a>
+                          @endif
+                       </td>
                         
                          <td  class="text-center">
                            
 
                             
-                            {!! Form::open(['url'=>route('offer.destroy',['id'=>$offer->id]),'method'=>'delete' ]) !!}
+                            {!! Form::open(['url'=>route('restaurant.destroy',['id'=>$restaurant->id]),'method'=>'delete' ]) !!}
                             {!!Form::button('<i class="fa fa-trash-o" ></i>' , ['type' => 'submit','class' => 'btn btn-danger btn-lg'] )!!}
                             {!! Form::close() !!}
 
@@ -75,7 +79,7 @@
                   @endforeach
                 </tbody>
               </table>    
-              {{ $offers->links()}}
+              {{ $restaurants->links()}}
 
             @else
                 <div class="alert alert-danger" role="alert">

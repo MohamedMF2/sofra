@@ -10,7 +10,6 @@ class CreateRestaurantsTable extends Migration {
 		Schema::create('restaurants', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('district_id');
-			$table->integer('category_id');
 			$table->string('image');
 			$table->string('name');
 			$table->decimal('minimum_charge', 8,2);

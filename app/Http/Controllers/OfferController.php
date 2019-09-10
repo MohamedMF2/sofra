@@ -12,11 +12,26 @@ class OfferController extends Controller
    *
    * @return Response
    */
-  public function index()
-  {
-    $offers = Offer::latest('id')->paginate();
-    return view('dashboard.offers.index',compact('offers'));
-  }
+    public function index(Request $request)
+    {
+      $offers=Offer::where(function ($query) use ($request){
+        
+        if($request->has('search')){
+
+            $query->whereHas('restaurant',function ($restaurant) use($request){
+                $restaurant->where('name','like','%'.$request->search.'%');
+            });
+
+            $query->orWhere(function ($query) use($request){
+              $query->where('name','like','%'.$request->search.'%')
+                    ->orWhere('description','like','%'.$request->search.'%');
+          });
+        }
+      })->latest()->paginate();
+
+
+      return view('dashboard.offers.index',compact('offers'));
+    }
 
   /**
    * Show the form for creating a new resource.
@@ -77,9 +92,11 @@ class OfferController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function destroy($id)
+  public function destroy(Offer $offer)
   {
-    
+    $offer->delete();
+    flash()->error('The Offer "'. $offer->name.'"has been deleted Successfully');
+    return back();
   }
   
 }

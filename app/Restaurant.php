@@ -9,7 +9,7 @@ class Restaurant extends Model
 
     protected $table = 'restaurants';
     public $timestamps = true;
-    protected $fillable = array('district_id', 'category_id', 'image', 'name', 'minimum_charge', 'delivery', 'phone', 'whatsapp', 'email', 'status', 'activated', 'api_token','password','pin_code');
+    protected $fillable = array('district_id', 'image', 'name', 'minimum_charge', 'delivery', 'phone', 'whatsapp', 'email', 'status', 'activated', 'api_token','password','pin_code');
     protected $hidden = array('password','api_token','activated',);
 
     public function contacts()

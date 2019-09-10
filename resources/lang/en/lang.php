@@ -110,6 +110,37 @@ return [
     'restaurant'=>' Restaurant ' ,
     'notes'=>' Notes ',
     'choose a restaurant for your payment'=>'choose a restaurant for your payment',
+    'offers'=>'Offers',
+    'offer'=>'Offer',
+    'start date'=> 'Start Date',
+    'end date'=> 'End Date',
+    'search offers by name , description or restaurant name'=>' search offers by name , description or restaurant name',
+    'type' => 'Type',
+    'commission'=>' commission  ' ,
+    'commission_statement'=>'  commission_statement  ' ,
+
+    'restaurants'=>' Restaurants ' ,
+    'search restaurants by name,city,district,category'=>' search restaurants by name,city,district,category  ' ,
+    'change state'=>' Change state ',
+    '\'s restaurant' => '\'s restaurant',
+    'search orders by client,restaurant,status,payment,phone,address'=>'search orders by client,restaurant,status,payment,phone,address',
+    'orders'=>'orders',
+    'order'=>'order',
+    'products'=>'products',
+    'quantity'=>' quantity',
+    'price'=>'price',
+    'special_order'=>'special_order  '
+
+
+
+
+
+
+
+
+
+
+
 
 
 

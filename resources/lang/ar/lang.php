@@ -119,7 +119,26 @@ return [
     'settings'=>' الاعدادات ',
     'notes'=>' ملاحظات ',
     'choose a restaurant for your payment'=>'اختار مطعم للمدفوعات',
-
+    'offers'=>'العروض',
+    'offer'=>'العرض',
+    'start date'=> 'تاريخ البداية ',
+    'end date'=> 'تاريخ النهاية',
+    'search offers by name , description or restaurant name'=>' أبحث العروض بالأسم أو الوصف أو أسم المطعم ',
+    'type' => ' النوع ',
+    'commission'=>' العمولة  ' ,
+    'commission_statement'=>'  جملة العمولة  ' ,
+    'restaurants'=>' المطاعم ' ,
+    'search restaurants by name,city,district,category,phone,email'=>' ابحث بالاسم , المدينة , الحى , القسم, الهاتف ,البريد الالكترونى  ' ,
+    'change state'=>' تغيير الحالة ',
+    '\'s restaurant' => 'مطعم',
+    'search orders by client,restaurant,status,payment,phone,address'=>'العميل , المطعم , حالة الطلب , طريقة الدفع ,العنوان ',
+    'orders'=>'الطلبات',
+    'order'=>'الطلب',
+    'order details'=>'تفاصيل الطلب ',
+    'products'=>'المنتجات',
+    'quantity'=>' الكمية',
+    'price'=>'السعر',
+    'special_order'=>'طلب خاص '
 
 
 ];
