@@ -48,7 +48,6 @@ class UserController extends Controller
             'name' => 'required|min:3|max:50',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:3',
-            'roles' => 'required'
         ]);
         //Create user 
         $user = User::create($request->except('roles'));
@@ -60,6 +59,33 @@ class UserController extends Controller
       
         flash()->success(' New User Has been created successfully');
         return redirect(route('user.index'));
+
+
+
+            /* 
+             //Validation
+         request()->validate([
+            'name' => 'required|min:3|max:50',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed|min:3',
+            // 'roles' => 'required'
+        ]);
+        //Create user 
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+        // if the users is not empty  attach it to the user     
+        if($request->roles <> ''){
+            $user->roles()->attach($request->roles);
+        }
+      
+        flash()->success(' New User Has been created successfully');
+        return redirect(route('user.index'));
+            */
+
+
     }
 
     /**

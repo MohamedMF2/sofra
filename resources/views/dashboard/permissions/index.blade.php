@@ -10,7 +10,7 @@
     <div class="box">
         <div class="box-header with-border">
             <a href="{{ url(route('permission.create')) }}" class="btn btn-primary" >
-                <i class="fa fa-plus"></i> @lang('lang.new permission')  
+                <i class="fa fa-plus"></i> @lang('lang.create permission')  
               </a>  <br><br>
               @include('flash::message')
             

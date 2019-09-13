@@ -17,7 +17,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => ['aut
         return view('welcome');
     });
 
-        Route::group( ["prefix" => "dashboard" ] , function (){  
+        Route::group( 
+            [  "middleware" => ['auth','auto-check-permission'], "prefix" => "dashboard" ] , 
+            function (){  
             Route::get('home', 'HomeController@index')->name('home');
             Route::resource('city', 'CityController');
             Route::resource('city.district','CityDistrictController');

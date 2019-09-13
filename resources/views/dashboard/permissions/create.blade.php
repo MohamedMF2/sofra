@@ -29,9 +29,15 @@
               </div>
 
               <div class="form-group">
-                  <label for="my-image">@lang('lang.guard name')</label>
+                  <label for="my-guard_name">@lang('lang.guard name')</label>
                   <input id="my-guard_name" class="form-control" type="text" name="guard_name" placeholder=" Enter permission's guard name"value="{{old('guard_name')}}">
                       <span class=" text-danger"> {{ $errors->first('guard_name') }}</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="my-route_name">@lang('lang.route')</label>
+                  <input id="my-route_name" class="form-control" type="text" name="route" placeholder=" Enter permission's route name"value="{{old('route')}}">
+                      <span class=" text-danger"> {{ $errors->first('route') }}</span>
                 </div>
                                    
               <button type="submit" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i> @lang('lang.add')  </button>

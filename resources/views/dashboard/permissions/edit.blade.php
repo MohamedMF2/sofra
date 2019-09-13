@@ -27,15 +27,21 @@
           <form action="{{ action('PermissionController@update',$permission->id) }}" method="post" autocomplete="off">        
             @method('PUT')
               <div class="form-group">
-                <label for="my-input">@lang('lang.name')</label>
-                 <input id="my-input" class="form-control" type="text" name="name" value="{{$permission->name}}">
+                <label for="my-name">@lang('lang.name')</label>
+                 <input id="my-name" class="form-control" type="text" name="name" value="{{$permission->name}}">
                 <span class=" text-danger"> {{ $errors->first('name') }}</span>
               </div>
 
               <div class="form-group">
-                  <label for="my-image">@lang('lang.guard name')</label>
-                  <input id="my-image" class="form-control" type="text" name="guard_name" placeholder=" Enter permission's guard name" value="{{$permission->guard_name}}">
+                  <label for="my-guard">@lang('lang.guard name')</label>
+                  <input id="my-guard" class="form-control" type="text" name="guard_name"  value="{{$permission->guard_name}}">
                       <span class=" text-danger"> {{ $errors->first('guard_name') }}</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="my-route">@lang('lang.route')</label>
+                  <input id="my-route" class="form-control" type="text" name="route"  value="{{$permission->route}}">
+                      <span class=" text-danger"> {{ $errors->first('route') }}</span>
                 </div>
 
               

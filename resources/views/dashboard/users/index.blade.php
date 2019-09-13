@@ -45,7 +45,7 @@
                       <td  class="text-center"> {{ $user->email}}</td>
                      <td class="text-center">  
                        @foreach ($user->roles as $role)
-                        <li>{{ $role->display_name}}</li>
+                        <li>{{ $role->name}}</li>
                       @endforeach 
                      </td>
                          <td  class="text-center"> 
@@ -67,7 +67,7 @@
                  
                 </tbody>
               </table>    
-
+              {{ $users->links()}}
             @else
                 <div class="alert alert-danger" role="alert">
                     <h4 class="alert-heading">@lang('lang.no data')</h4>

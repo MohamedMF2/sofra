@@ -35,6 +35,7 @@ class PermissionController extends Controller
         ]);
         $permission = new Permission();
         $permission->name = $request->name;
+        $permission->route = $request->route;
         $permission->save();
         if ($request->roles <> '') { 
             foreach ($request->roles as $key=>$value) {
@@ -42,7 +43,7 @@ class PermissionController extends Controller
                 $role->permissions()->attach($permission);
             }
         }
-        flash()->success('permission'.$permission->name.' created successfully');
+        flash()->success(' New Permission ( '.$permission->name.' ) created successfully');
         return back();
     }
    
@@ -64,6 +65,7 @@ class PermissionController extends Controller
             'guard_name'=>'required'
         ]);
         $permission->name=$request->name;
+        $permission->route = $request->route;
         $permission->guard_name=$request->guard_name;
         $permission->save();
         flash()->success('permission'.$permission->name.' updated successfully');

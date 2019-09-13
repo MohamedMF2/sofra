@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{{-- @inject('role', 'App\Role') --}}
+@inject('role', 'App\Role')
 
 @section('page_title',__('lang.create new user'))
                  
@@ -51,19 +51,19 @@
               </div>
               
               <?php 
-                // $roles=$role->pluck('display_name','id')->toArray();
+                $roles=$role->pluck('name','id')->toArray();
               ?> 
               
-              {{-- <div class="form-group">
+              <div class="form-group">
                 <label for="my-input"> @lang('lang.role')</label>
-                <select name="roles_list[]" id="my-input" class="form-control" multiple>
+                <select name="roles[]" id="my-input" class="form-control" multiple>
                   <option  disabled> @lang('lang.choose user role')</option>
                   @foreach ($roles as $id=>$name)
                     <option value="{{$id}}"> {{$name}}</option>
                   @endforeach
                 </select>
-                <span class=" text-danger"> {{ $errors->first('roles_list') }}</span>
-              </div> --}}
+                <span class=" text-danger"> {{ $errors->first('roles') }}</span>
+              </div>
 
               <button type="submit" class="btn btn-primary" ><i class="fa fa-plus"></i> @lang('lang.add') </button>
             @csrf
